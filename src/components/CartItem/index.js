@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native';
 import { FontAwesome, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+import menuItems from '../../assets/data/menuItems';
 import Menu from '../Menu';
 import styles from './styles';
 
@@ -104,7 +105,12 @@ const CartItem = () => {
         </View>
 
         {/* Menu */}
-        <Menu />
+        <FlatList 
+          data={menuItems}
+          renderItem={({item}) => (
+            <Menu menuItems={item} />
+          )}
+        />
       </ScrollView>
     </View>
   );
