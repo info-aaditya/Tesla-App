@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, FlatList } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, Image, FlatList } from 'react-native';
 import { FontAwesome, FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import menuItems from '../../assets/data/menuItems';
 import Menu from '../Menu';
@@ -14,6 +14,55 @@ const CartItem = () => {
       setLocked(true);
     }
   }
+
+  const Header = () => {
+    return (
+      <>
+        {/* Control Icons */}
+        <View style={styles.controls}>
+          <TouchableOpacity onPress={clickLock} >
+            <View style={styles.controlsButton}>
+              <FontAwesome5 name= {locked ? "lock" : "unlock-alt"}
+                style={styles.iconView}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={''}>
+            <View style={styles.controlsButton}>
+              <FontAwesome5 name="key"
+                style={styles.iconView}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={''}>
+            <View style={styles.controlsButton}>
+              <FontAwesome5 name="fan"
+                style={styles.iconView}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={''}>
+            <View style={styles.controlsButton}>
+              <MaterialCommunityIcons name="lightning-bolt"
+                style={styles.iconView}
+             />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={''}>
+            <View style={styles.controlsButton}>
+              <MaterialCommunityIcons name="bluetooth"
+                style={styles.iconView}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -59,59 +108,16 @@ const CartItem = () => {
       <View style={styles.status}>
         <Text style={styles.statusText}> Parked </Text>
       </View>
-      
-      <ScrollView>
-        {/* Control Icons */}
-        <View style={styles.controls}>
-          <TouchableOpacity onPress={clickLock} >
-            <View style={styles.controlsButton}>
-              <FontAwesome5 name= {locked ? "lock" : "unlock-alt"}
-                style={styles.iconView}
-              />
-            </View>
-          </TouchableOpacity>
 
-          <TouchableOpacity onPress={''}>
-            <View style={styles.controlsButton}>
-              <FontAwesome5 name="key"
-                style={styles.iconView}
-              />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={''}>
-            <View style={styles.controlsButton}>
-              <FontAwesome5 name="fan"
-                style={styles.iconView}
-              />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={''}>
-            <View style={styles.controlsButton}>
-              <MaterialCommunityIcons name="lightning-bolt"
-                style={styles.iconView}
-             />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={''}>
-            <View style={styles.controlsButton}>
-              <MaterialCommunityIcons name="bluetooth"
-                style={styles.iconView}
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        {/* Menu */}
-        <FlatList 
-          data={menuItems}
-          renderItem={({item}) => (
-            <Menu menuItems={item} />
-          )}
-        />
-      </ScrollView>
+      {/* Menu */}
+      <FlatList 
+        data={menuItems}
+        renderItem={({item}) => (
+          <Menu menuItems={item} />
+        )}
+        ListHeaderComponent={Header}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }
